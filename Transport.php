@@ -78,7 +78,7 @@ class Transport implements TransportInterface
             return $response;
         }
 
-        $exception = new \KTL\Sigma\Transport\Exceptions\ApiException(
+        $exception = new ApiException(
             $response,
             $response['message'] ??
             (
