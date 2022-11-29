@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Gateway\Transport\Exceptions\Handlers;
+namespace Kinatech\Transport\Exceptions\Handlers;
 
 
-use App\Services\Gateway\Transport\Exceptions\ApiException;
-use App\Services\Gateway\Transport\Exceptions\ApiForbiddenException;
+use Kinatech\Transport\Exceptions\ApiException;
+use Kinatech\Transport\Exceptions\ApiForbiddenException;
 
 /**
  * Class ForbiddenErrorHandler
@@ -19,6 +19,7 @@ class ForbiddenErrorHandler extends AbstractErrorHandler
     {
         throw new ApiForbiddenException(
             $exception->getResponse(),
+            $exception->getMessage(),
             $exception->getCode(),
             $exception->getPrevious()
         );

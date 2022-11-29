@@ -1,19 +1,18 @@
 <?php
 
 
-namespace App\Services\Gateway\Transport;
+namespace Kinatech\Transport;
 
 
-use App\Services\Gateway\Transport\Contract\TransportInterface;
-use App\Services\Gateway\Transport\Exceptions\ApiException;
-use App\Services\Gateway\Transport\Exceptions\Handlers\AbstractErrorHandler;
-use App\Services\Gateway\Transport\Exceptions\Handlers\BadRequestErrorHandler;
-use App\Services\Gateway\Transport\Exceptions\Handlers\ForbiddenErrorHandler;
-use App\Services\Gateway\Transport\Exceptions\Handlers\NetworkErrorHandler;
-use App\Services\Gateway\Transport\Exceptions\Handlers\NotFoundErrorHandler;
-use App\Services\Gateway\Transport\Exceptions\Handlers\UnauthorizedErrorHandler;
+use Kinatech\Transport\Contract\TransportInterface;
+use Kinatech\Transport\Exceptions\ApiException;
+use Kinatech\Transport\Exceptions\Handlers\AbstractErrorHandler;
+use Kinatech\Transport\Exceptions\Handlers\BadRequestErrorHandler;
+use Kinatech\Transport\Exceptions\Handlers\ForbiddenErrorHandler;
+use Kinatech\Transport\Exceptions\Handlers\NetworkErrorHandler;
+use Kinatech\Transport\Exceptions\Handlers\NotFoundErrorHandler;
+use Kinatech\Transport\Exceptions\Handlers\UnauthorizedErrorHandler;
 use Curl\Curl;
-use Illuminate\Support\Facades\Log;
 
 class Transport implements TransportInterface
 {
@@ -70,19 +69,33 @@ class Transport implements TransportInterface
     public function request($endpoint, array $data = [], $method = 'get'): mixed
     {
         $rawResponse = $this->rawRequest($endpoint, $data, $method);
+
         $httpStatusCode = $this->getClient()->getInfo(CURLINFO_HTTP_CODE);
+
         $response = json_decode($rawResponse, true);
 
         if ($httpStatusCode >= 200 && $httpStatusCode <= 299){
             return $response;
         }
 
-        $exception = new ApiException($response, $response['message'] ?? $rawResponse ?? 'Unknown error message', $httpStatusCode);
+        $exception = new \KTL\Sigma\Transport\Exceptions\ApiException(
+            $response,
+            $response['message'] ??
+            (
+            $response
+                ? $response['error']
+                ? $response['error']['message']
+                : null
+                : null
+            ) ??
+            $rawResponse ??
+            'Unknown error message',
+            $httpStatusCode
+        );
 
-        /* Log Api Errors */
-        Log::error($exception->getMessage());
+        $handler = $this->errorHandlers[$httpStatusCode];
 
-        if ($handler = $this->errorHandlers[$httpStatusCode] ?? false){
+        if ($handler ?? false){
             return $handler->handle($exception, compact('endpoint', 'data', 'method'));
         }
 

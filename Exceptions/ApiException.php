@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Gateway\Transport\Exceptions;
+namespace Kinatech\Transport\Exceptions;
 
 use Exception;
 use Throwable;
@@ -11,7 +11,7 @@ class ApiException extends Exception
 
     public function __construct($response, $message = "", $httpCode = 0, Throwable $previous = null)
     {
-        parent::__construct("The request ended on a $httpCode code : $message", $httpCode, $previous);
+        parent::__construct($message, $httpCode, $previous);
         $this->response = $response;
     }
 

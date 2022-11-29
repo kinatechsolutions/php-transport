@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Gateway\Transport\Contract;
+namespace Kinatech\Transport\Contract;
 
 
 interface TransportInterface

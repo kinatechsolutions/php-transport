@@ -6,15 +6,11 @@
         {
             "name": "Michael",
             "email": "michael.kamau@kinetics.com"
-        },
-        {
-            "name": "Anthony",
-            "email": "mwendwak@kinetics.com"
         }
     ],
     "license": "GPL-3.0-or-later",
     "require": {
-        "php": "^5.6|^7.0|^8.0",
+        "php": "^8.1",
         "ext-curl": "*",
         "inertiajs/inertia-laravel": "^0.5.4",
         "php-curl-class/php-curl-class": "^9.10.0",

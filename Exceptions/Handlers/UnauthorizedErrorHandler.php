@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Gateway\Transport\Exceptions\Handlers;
+namespace Kinatech\Transport\Exceptions\Handlers;
 
 
-use App\Services\Gateway\Transport\Exceptions\ApiException;
-use App\Services\Gateway\Transport\Exceptions\ApiUnauthorizedException;
+use Kinatech\Transport\Exceptions\ApiException;
+use Kinatech\Transport\Exceptions\ApiUnauthorizedException;
 
 /**
  * Class UnauthorizedErrorHandler
@@ -19,6 +19,7 @@ class UnauthorizedErrorHandler extends AbstractErrorHandler
     {
         throw new ApiUnauthorizedException(
             $exception->getResponse(),
+            $exception->getMessage(),
             $exception->getCode(),
             $exception->getPrevious()
         );

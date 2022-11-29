@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Gateway\Transport\Exceptions;
+namespace Kinatech\Transport\Exceptions;
 
 use Throwable;
 

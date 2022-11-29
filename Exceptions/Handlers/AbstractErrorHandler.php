@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Gateway\Transport\Exceptions\Handlers;
+namespace Kinatech\Transport\Exceptions\Handlers;
 
 
-use App\Services\Gateway\Transport\Contract\TransportInterface;
-use App\Services\Gateway\Transport\Exceptions\ApiException;
+use Kinatech\Transport\Contract\TransportInterface;
+use Kinatech\Transport\Exceptions\ApiException;
 
 /**
  * Class AbstractErrorHandler

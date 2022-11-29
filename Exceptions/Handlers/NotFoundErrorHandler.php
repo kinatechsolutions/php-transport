@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Gateway\Transport\Exceptions\Handlers;
+namespace Kinatech\Transport\Exceptions\Handlers;
 
 
-use App\Services\Gateway\Transport\Exceptions\ApiEntityNotFoundException;
-use App\Services\Gateway\Transport\Exceptions\ApiException;
+use Kinatech\Transport\Exceptions\ApiEntityNotFoundException;
+use Kinatech\Transport\Exceptions\ApiException;
 
 /**
  * Class NetworkErrorHandler
@@ -19,6 +19,7 @@ class NotFoundErrorHandler extends AbstractErrorHandler
     {
         throw new ApiEntityNotFoundException(
             $exception->getResponse(),
+            $exception->getMessage(),
             $exception->getCode(),
             $exception->getPrevious()
         );
