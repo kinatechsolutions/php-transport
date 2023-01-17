@@ -2,7 +2,6 @@
 
 namespace Kinatech\Transport\Exceptions\Handlers;
 
-
 use Kinatech\Transport\Exceptions\ApiException;
 
 /**

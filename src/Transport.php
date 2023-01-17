@@ -3,7 +3,6 @@
 
 namespace Kinatech\Transport;
 
-
 use Kinatech\Transport\Contract\TransportInterface;
 use Kinatech\Transport\Exceptions\ApiException;
 use Kinatech\Transport\Exceptions\Handlers\AbstractErrorHandler;
@@ -180,5 +179,4 @@ class Transport implements TransportInterface
         $this->getClient()->setHeader('Content-Type', static::JSON_MIME_TYPE);
         return json_encode($data);
     }
-
 }

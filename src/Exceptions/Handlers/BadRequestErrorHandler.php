@@ -2,22 +2,21 @@
 
 namespace Kinatech\Transport\Exceptions\Handlers;
 
-
+use Kinatech\Transport\Exceptions\ApiBadRequestException;
 use Kinatech\Transport\Exceptions\ApiException;
-use Kinatech\Transport\Exceptions\ApiUnauthorizedException;
 
 /**
- * Class UnauthorizedErrorHandler
+ * Class BadRequestErrorHandler
  * @package Cristal\ApiWrapper\Exceptions
  */
-class UnauthorizedErrorHandler extends AbstractErrorHandler
+class BadRequestErrorHandler extends AbstractErrorHandler
 {
     /**
      * {@inheritdoc}
      */
     public function handle(ApiException $exception, array $requestArguments)
     {
-        throw new ApiUnauthorizedException(
+        throw new ApiBadRequestException(
             $exception->getResponse(),
             $exception->getMessage(),
             $exception->getCode(),
