@@ -18,12 +18,5 @@
         "psr-4": {
             "Kinatech\\Transport\\": "src/"
         }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "KTL\\Sigma\\Providers\\SigmaServiceProvider"
-            ]
-        }
     }
 }
